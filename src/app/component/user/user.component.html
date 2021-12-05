@@ -1,0 +1,55 @@
+<br><br>
+<div fxLayout="row"  fxLayoutAlign="center center" >
+    
+    <form class="dbrain-form" (submit)="saveUserInfo()">
+        <div fxLayout="column" fxLayoutAlign="space-around center">
+            <mat-form-field class="dbrain-full-width" appearance="outline">
+                <mat-label>First Name</mat-label>
+                <input matInput id="first_name" [(ngModel)]="user.first_name" placeholder="John" [formControl]="firstnameFormControl"  [errorStateMatcher]="matcher">
+                <mat-error *ngIf="firstnameFormControl.hasError('required')">
+                    First name is <strong>required</strong>
+                </mat-error>
+            </mat-form-field>
+
+            <mat-form-field class="dbrain-full-width" appearance="outline">
+                <mat-label>Last Name</mat-label>
+                <input matInput id="last_name"  [(ngModel)]="user.last_name" placeholder="Cooper" [formControl]="lastnameFormControl" [errorStateMatcher]="matcher">
+                <mat-error *ngIf="lastnameFormControl.hasError('required')">
+                    Last name is <strong>required</strong>
+                </mat-error>
+            </mat-form-field>
+
+            <mat-form-field class="dbrain-full-width" appearance="outline">
+                <mat-label>Date of birth</mat-label>
+                <input type="date" matInput id="birthday" [(ngModel)]="user.birthday" [formControl]="dobFormControl" [errorStateMatcher]="matcher">
+                <mat-error *ngIf="dobFormControl.hasError('required')">
+                    Date of birth is <strong>required</strong>
+                </mat-error>
+            </mat-form-field>
+
+            <mat-form-field class="dbrain-full-width" appearance="outline">
+                <mat-label>Telephone number</mat-label>
+                <input type="tel"  id="telephone" [(ngModel)]="user.telephone" placeholder="0403278475" matInput [formControl]="telephoneFormControl" [errorStateMatcher]="matcher">
+                <mat-error *ngIf="telephoneFormControl.hasError('required')">
+                    Date of birth is <strong>required</strong>
+                </mat-error>
+            </mat-form-field>
+
+            <mat-form-field class="dbrain-full-width" appearance="outline">
+                <mat-label>Email</mat-label>
+                <input type="email" matInput id="email" [(ngModel)]="user.email" [formControl]="emailFormControl" [errorStateMatcher]="matcher"
+                       placeholder="Ex. john@dbrain.com.au">
+                <mat-error *ngIf="emailFormControl.hasError('email') && !emailFormControl.hasError('required')">
+                  Please enter a valid email address
+                </mat-error>
+                <mat-error *ngIf="emailFormControl.hasError('required')">
+                  Email is <strong>required</strong>
+                </mat-error>
+            </mat-form-field>
+        </div>
+        <div fxLayout="row" fxLayoutAlign="space-between center">
+            <button mat-raised-button color="primary" (click)="backUserList()" >Cancel</button>
+            <button type="submit" mat-raised-button color="primary" >Save</button>
+          </div>
+    </form>
+</div>

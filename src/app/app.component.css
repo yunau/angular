@@ -1,0 +1,24 @@
+.dbrain-container {
+  background-color: #fff;
+  height: 100%;
+}
+
+.dbrain-drawer-panel {
+    width:150px;
+    background-color: #fff;
+}
+
+.dbrain-button-100{
+    width: 100%!important;
+    min-width: unset!important;
+}
+.dbrain-header { 
+    color:#7B1FA1;
+    font-size: 15px;
+    font-weight: bold;
+}
+
+section {
+  display: table;
+}
+
