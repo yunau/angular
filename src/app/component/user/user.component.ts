@@ -4,6 +4,7 @@ import {FormControl, FormGroupDirective, NgForm, Validators} from '@angular/form
 import {ErrorStateMatcher} from '@angular/material/core';
 import { Router } from '@angular/router';
 import { UserService } from 'src/app/service/user.service';
+import * as moment from 'moment';
 
 export class DBrainErrorStateMatcher implements ErrorStateMatcher {
   isErrorState(control: FormControl | null, form: FormGroupDirective | NgForm | null): boolean {
@@ -52,8 +53,23 @@ export class UserComponent implements OnInit {
       if (this.user.id == 0) { //add new user
         //set a new user id for the new user you are going to add
         this.user.id = this.userservice.listUsers().length + 1;
+
+        //important !!! need to change date format yyyy-mm-dd to input date component
+        let tempDob = this.user.birthday;
+        let newDob = moment(tempDob).format('DD/MM/YYYY');
+        this.user.birthday = newDob;
+        
+        //save the date to db
         this.userservice.addUser(this.user);
+
       } else { //edit & save user
+
+        //important !!! need to change date format yyyy-mm-dd to input date component
+        let tempDob = this.user.birthday;
+        let newDob = moment(tempDob).format('DD/MM/YYYY');
+        this.user.birthday = newDob;
+
+        //save the date to db
         this.userservice.editUser(this.user);
       }
       this.router.navigateByUrl('/userlist'); 

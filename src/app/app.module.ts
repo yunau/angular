@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-
+import { MAT_DATE_LOCALE } from '@angular/material/core';
 import { MaterialModule } from '../material.module';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -26,7 +26,7 @@ import { UserService } from './service/user.service';
     FormsModule,
     ReactiveFormsModule
   ],
-  providers: [UserService],
+  providers: [UserService,{provide: MAT_DATE_LOCALE, useValue: 'en-GB'}],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

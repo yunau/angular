@@ -4,6 +4,7 @@ import { User } from 'src/app/model/user';
 import { UserService } from 'src/app/service/user.service';
 import {MatTableDataSource} from '@angular/material/table';
 import {SelectionModel} from '@angular/cdk/collections';
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-user-list',
@@ -12,8 +13,8 @@ import {SelectionModel} from '@angular/cdk/collections';
 })
 export class UserListComponent implements AfterViewInit {
 
-  screenWidth: any;
-  screenHeight: any;
+  screenWidth: number = 0;
+  screenHeight: number = 0;
   user: User = {
     id: 0,
     first_name: "",
@@ -38,9 +39,12 @@ export class UserListComponent implements AfterViewInit {
     this.screenHeight = window.screen.height;
   }
 
-  ngAfterViewInit() {}
+  ngAfterViewInit() { }
 
-  constructor(private router: Router, public userservice: UserService) { }
+  constructor(private router: Router, public userservice: UserService) { 
+    this.screenWidth = window.screen.width;
+    this.screenHeight = window.screen.height;
+  }
 
   addNewUser() {
     this.userservice.setUser(this.user); 
@@ -49,6 +53,10 @@ export class UserListComponent implements AfterViewInit {
 
   editNewUser() {
     let selected_user = this.selection.selected[0];
+    //important !!! need to change date format yyyy-mm-dd to input date component
+    let tempDob = selected_user.birthday;
+    let newDob = moment(tempDob, 'DD/MM/YYYY').format('YYYY-MM-DD');
+    selected_user.birthday = newDob;
     this.userservice.setUser(selected_user); 
     this.router.navigateByUrl('/user');
   }
